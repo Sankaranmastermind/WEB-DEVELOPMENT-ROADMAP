@@ -23,7 +23,7 @@ const Index = () => {
     : 0;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Hero Section */}
       {!selectedPath && (
         <div className="container mx-auto px-4 py-16 relative overflow-hidden">
@@ -52,7 +52,7 @@ const Index = () => {
               <span>AI-Powered Learning • Updated 2025</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-mono font-bold text-foreground leading-tight">
-              Your Web Dev <span className="text-glow animate-pulse-glow">Roadmap</span>
+              Your Web Dev <span className="text-glow ">Roadmap</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Follow a clear, structured path to becoming a web developer. Track your progress,
@@ -127,6 +127,15 @@ const Index = () => {
         isChallengeCompleted={selectedStep ? !!challenges[selectedStep.id] : false}
         onToggleChallenge={() => selectedStep && toggleChallenge(selectedStep.id)}
       />
+
+      {/* Footer */}
+      <footer className="mt-auto py-8 border-t border-border">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-muted-foreground text-sm">
+            &copy; 2025. All Rights Reserved. Build by Sankaran using Lovable
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

@@ -9,13 +9,13 @@ interface ProgressBarProps {
 
 export function ProgressBar({ percentage, completedCount, totalCount }: ProgressBarProps) {
   return (
-    <div className="w-full p-4 bg-card border border-border rounded-lg animate-fade-in">
+    <div className="w-full p-4 bg-card border border-border rounded-lg animate-fade-in hover:border-foreground/30 transition-all duration-500 glow-border">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <CheckCircle2 className="w-5 h-5 text-success" />
+          <CheckCircle2 className="w-5 h-5 text-foreground animate-glow-pulse" />
           <span className="text-sm font-semibold text-foreground">Your Progress</span>
         </div>
-        <span className="text-sm font-mono font-bold text-primary">
+        <span className="text-sm font-mono font-bold text-foreground text-glow">
           {completedCount} / {totalCount}
         </span>
       </div>

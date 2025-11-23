@@ -28,12 +28,12 @@ const Index = () => {
       {!selectedPath && (
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
-              <Sparkles className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/10 border border-foreground/20 text-foreground text-sm font-medium mb-4 animate-border-glow">
+              <Sparkles className="w-4 h-4 animate-glow-pulse" />
               <span>AI-Powered Learning • Updated 2025</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-mono font-bold text-foreground leading-tight">
-              Your Web Dev <span className="text-primary">Roadmap</span>
+              Your Web Dev <span className="text-glow animate-pulse-glow">Roadmap</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Follow a clear, structured path to becoming a web developer. Track your progress,

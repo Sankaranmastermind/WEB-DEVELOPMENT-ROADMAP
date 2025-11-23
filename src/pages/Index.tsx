@@ -15,11 +15,12 @@ const Index = () => {
   const { progress, toggleStep, getProgressPercentage, challenges, toggleChallenge } = useProgress(selectedPath || undefined);
 
   const currentRoadmap = selectedPath ? roadmaps[selectedPath] : null;
+  const stepIds = currentRoadmap ? currentRoadmap.steps.map(step => step.id) : undefined;
   const progressPercentage = currentRoadmap
-    ? getProgressPercentage(currentRoadmap.steps.length)
+    ? getProgressPercentage(currentRoadmap.steps.length, stepIds)
     : 0;
   const completedCount = currentRoadmap
-    ? currentRoadmap.steps.filter((step) => progress[step.id]).length
+    ? currentRoadmap.steps.filter((step) => progress[step.id] || challenges[step.id]).length
     : 0;
 
   return (
@@ -132,7 +133,7 @@ const Index = () => {
       <footer className="mt-auto py-8 border-t border-border">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground text-sm">
-            &copy; 2025. All Rights Reserved. Build by Sankaran using Lovable
+            &copy; 2025 All Rights Reserved. Build by Sankaran using Lovable
           </p>
         </div>
       </footer>

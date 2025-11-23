@@ -89,14 +89,14 @@ export function StepDetail({ step, isOpen, onClose, isChallengeCompleted, onTogg
               <Button
                 variant={isChallengeCompleted ? "default" : "outline"}
                 size="sm"
-                className={`text-xs transition-all ${
+                className={`text-xs transition-all cursor-pointer ${
                   isChallengeCompleted 
-                    ? "bg-success text-success-foreground hover:bg-success/90" 
+                    ? "bg-success text-success-foreground hover:bg-success/80 hover:opacity-90" 
                     : "border-accent/30 hover:bg-accent/20"
                 }`}
                 onClick={onToggleChallenge}
               >
-                {isChallengeCompleted ? "✓ Completed" : "Mark as Completed"}
+                {isChallengeCompleted ? "✓ Mark as Incomplete" : "Mark as Completed"}
               </Button>
             </div>
           )}

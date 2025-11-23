@@ -13,9 +13,11 @@ interface StepDetailProps {
   step: Step | null;
   isOpen: boolean;
   onClose: () => void;
+  isChallengeCompleted?: boolean;
+  onToggleChallenge?: () => void;
 }
 
-export function StepDetail({ step, isOpen, onClose }: StepDetailProps) {
+export function StepDetail({ step, isOpen, onClose, isChallengeCompleted, onToggleChallenge }: StepDetailProps) {
   if (!step) return null;
 
   return (
@@ -83,7 +85,19 @@ export function StepDetail({ step, isOpen, onClose }: StepDetailProps) {
           {step.optionalTask && (
             <div className="p-4 rounded-lg bg-accent/10 border border-accent/20">
               <h4 className="text-sm font-semibold text-accent mb-2">Practice Challenge</h4>
-              <p className="text-sm text-foreground leading-relaxed">{step.optionalTask}</p>
+              <p className="text-sm text-foreground leading-relaxed mb-3">{step.optionalTask}</p>
+              <Button
+                variant={isChallengeCompleted ? "default" : "outline"}
+                size="sm"
+                className={`text-xs transition-all ${
+                  isChallengeCompleted 
+                    ? "bg-success text-success-foreground hover:bg-success/90" 
+                    : "border-accent/30 hover:bg-accent/20"
+                }`}
+                onClick={onToggleChallenge}
+              >
+                {isChallengeCompleted ? "✓ Completed" : "Mark as Completed"}
+              </Button>
             </div>
           )}
         </div>

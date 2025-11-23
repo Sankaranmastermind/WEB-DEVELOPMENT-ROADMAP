@@ -12,7 +12,7 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 const Index = () => {
   const [selectedPath, setSelectedPath] = useState<PathType | null>(null);
   const [selectedStep, setSelectedStep] = useState<Step | null>(null);
-  const { progress, toggleStep, getProgressPercentage } = useProgress(selectedPath || undefined);
+  const { progress, toggleStep, getProgressPercentage, challenges, toggleChallenge } = useProgress(selectedPath || undefined);
 
   const currentRoadmap = selectedPath ? roadmaps[selectedPath] : null;
   const progressPercentage = currentRoadmap
@@ -26,8 +26,27 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       {!selectedPath && (
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
+        <div className="container mx-auto px-4 py-16 relative overflow-hidden">
+          {/* Animated particles background */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={i}
+                className="particle"
+                style={{
+                  width: `${Math.random() * 4 + 2}px`,
+                  height: `${Math.random() * 4 + 2}px`,
+                  left: `${Math.random() * 100}%`,
+                  top: `100%`,
+                  animation: `float-particle ${Math.random() * 10 + 15}s linear infinite`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  '--float-x': `${(Math.random() - 0.5) * 100}px`
+                } as React.CSSProperties}
+              />
+            ))}
+          </div>
+          
+          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in relative z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/10 border border-foreground/20 text-foreground text-sm font-medium mb-4 animate-border-glow">
               <Sparkles className="w-4 h-4 animate-glow-pulse" />
               <span>AI-Powered Learning • Updated 2025</span>
@@ -105,6 +124,8 @@ const Index = () => {
         step={selectedStep}
         isOpen={!!selectedStep}
         onClose={() => setSelectedStep(null)}
+        isChallengeCompleted={selectedStep ? !!challenges[selectedStep.id] : false}
+        onToggleChallenge={() => selectedStep && toggleChallenge(selectedStep.id)}
       />
     </div>
   );

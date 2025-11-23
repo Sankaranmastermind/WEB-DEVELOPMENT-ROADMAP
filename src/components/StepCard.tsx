@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Step } from "@/types/roadmap";
 import { Clock, ChevronRight, CheckCircle2 } from "lucide-react";
+import confetti from "canvas-confetti";
 
 interface StepCardProps {
   step: Step;
@@ -12,6 +13,39 @@ interface StepCardProps {
 }
 
 export function StepCard({ step, isCompleted, onToggleComplete, onClick, index }: StepCardProps) {
+  const handleToggleComplete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    if (!isCompleted) {
+      // Trigger confetti celebration
+      const rect = (e.target as HTMLElement).getBoundingClientRect();
+      const x = (rect.left + rect.width / 2) / window.innerWidth;
+      const y = (rect.top + rect.height / 2) / window.innerHeight;
+      
+      confetti({
+        particleCount: 50,
+        spread: 70,
+        origin: { x, y },
+        colors: ['#ffffff', '#f0f0f0', '#e0e0e0'],
+        disableForReducedMotion: true
+      });
+
+      // Create expanding rings
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          const ring = document.createElement('div');
+          ring.className = 'celebration-ring';
+          ring.style.left = `${rect.left + rect.width / 2 - 20}px`;
+          ring.style.top = `${rect.top + rect.height / 2 - 20}px`;
+          document.body.appendChild(ring);
+          setTimeout(() => ring.remove(), 800);
+        }, i * 150);
+      }
+    }
+    
+    onToggleComplete();
+  };
+
   return (
     <div className="relative animate-slide-in" style={{ animationDelay: `${index * 0.1}s` }}>
       {/* Connection line */}
@@ -39,8 +73,7 @@ export function StepCard({ step, isCompleted, onToggleComplete, onClick, index }
               </div>
               <Checkbox
                 checked={isCompleted}
-                onCheckedChange={onToggleComplete}
-                onClick={(e) => e.stopPropagation()}
+                onCheckedChange={() => handleToggleComplete({ target: { getBoundingClientRect: () => ({ left: 0, top: 0, width: 0, height: 0 }) } } as any)}
                 className="data-[state=checked]:bg-success data-[state=checked]:border-success"
               />
             </div>

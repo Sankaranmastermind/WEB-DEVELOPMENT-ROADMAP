@@ -133,7 +133,7 @@ const Index = () => {
       <footer className="mt-auto py-8 border-t border-border">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground text-sm">
-            &copy; 2025 All Rights Reserved. Build by Sankaran using Lovable
+            &copy; 2025 All Rights Reserved. Build by Sankaran
           </p>
         </div>
       </footer>
